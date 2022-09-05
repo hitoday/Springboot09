@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content = "text/html; charset = UTF-8">
+    <title>게시 글 상세</title>
+</head>
+
+<body th:align="center">
+
+<h2>게시글 상세 page</h2>
+
+<a th:href="@{/getBoardList}">게시판으로 이동</a>
+
+<form th:action="@{updateBoard}" method="post">
+    <input name = "seq" type="hidden" th:value="${boardList.seq}">
+
+<table th:align="center" border = "1" th:cellpadding="0" th:cellspacing="0">
+
+    <tr>
+        <td bgcolor="green" th:text = "No" width = "80"></td>
+        <td th:text="${boardList.seq}"></td>
+    </tr>
+    <tr>
+        <td bgcolor="green" th:text="분류" width = "70" align="center"></td>
+        <td>
+            <select name = "category" th:value="${boardList.category}" th:width="20">
+            <option value="none" selected disabled hidden>==분류 선택==</option>
+            <option value="상품">상품</option>
+            <option value="배송">배송</option>
+            <option value="교환">교환</option>
+            <option value="기타">기타</option>
+        </select>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="green" th:text = "제목"></td>
+        <!--
+             [서버]에서 java의 데이터를 [클라이언트]html문서에 값을 할당해 주는 문법${title}-->
+        <td><input type = "text" name="title" th:value="${boardList.title}"></td>
+    </tr>
+    <tr>
+        <td bgcolor="green" th:text = "작성자"></td>
+        <td th:text = "${boardList.writer}"></td>
+    </tr>
+    <tr>
+        <td bgcolor="green" th:text = "내용">
+        <td><textarea name="content" th:text="${boardList.content}" cols="40" rows="10"></textarea></td>
+    </tr>
+    <tr>
+        <td bgcolor="green" th:text="게시일"></td>
+        <td th:text = "${boardList.createDate}"></td>
+    </tr>
+    <tr>
+        <td bgcolor = "green" th:text="조회수"></td>
+        <td th:text="${boardList.cnt}"></td>
+    </tr>
+    <tr>
+        <td colspan = "2" align = "center">
+            <input type = "submit" value = "글 수정"/>
+        </td>
+    </tr>
+</table>
+</form>
+
+<br>
+<a th:href="@{/insertBoard}">새글 등록</a>&nbsp;&nbsp;&nbsp;
+<a th:href="@{/deleteBoard(seq=${boardList.seq})}">글 삭제</a>&nbsp;&nbsp;&nbsp;
+<hr>
+
+<h3>댓글 작성</h3>
+
+<form th:action="@{commentInput}" method="post">
+    <table th:align="center" border = "1" th:cellpadding="0" th:cellspacing="0">
+        <tr>
+          <td bgcolor="#adff2f" th:text="작성자" th:align="center"></td>
+          <td><input type = "text" name="writerC" size = "20"></td>
+        </tr>
+         <tr>
+            <td bgcolor="#adff2f" th:text = "댓글" align = "center"></td>
+            <td><textarea name = "comments" cols = "40" rows = "10"></textarea></td>
+         </tr>
+        <tr>
+            <td colspan="2" align = "center">
+                <input type = "submit" value = "댓글 등록"/>
+        </tr>
+    </table>
+    <hr>
+
+    <h3>댓글 목록</h3>
+
+    <table th:align="center" border = "1" th:cellpadding = "0" th:cellspacing = "0" th:width = "600">
+          <tr>
+            <th bgcolor = "#d2691e" width = "50">No</th>
+            <th bgcolor = "#d2691e" width = "150">작성자</th>
+            <th bgcolor = "#d2691e" width = "250">댓글 내용</th>
+            <th bgcolor = "#d2691e" width = "100">등록일</th>
+        </tr>
+
+        <tr th:each = "boardc : ${boardList}">
+            <td th:text = "${boardc.seq}"></td>
+            <td th:text = "${boardc.writerC}"></td>
+            <td th:text = "${boardc.comments}"></td>
+            <td th:text = "${boardc.createDate}"></td>
+        </tr>
+    </table>
+</form>
+<br>
+<!--0901-->
+<!--업로드한 사진 불러오기-->
+<img th:src="@{${imgLoading}}">
+<hr>
+<form th:action="@{/uploadFile}" method="post" enctype="multipart/form-data">
+    <!--    multipartupload객체를 사용해 서버에 데이터 전달-->
+    <!--    input tag의 타입이 file로 지정해 전달-->
+    <!--    name이 uploadfile로 requestParam에 동일한 매개변수명을 가져야 함-->
+    <input name="writer" type="hidden" th:value="${boardList.writer}">
+    <input type="file" name="uploadfile" multiple="multiple"/>
+    <input type="submit" value="데이터 전송">
+</form>
+<br>
+
+</body>
+</html>

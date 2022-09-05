@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content = "text/html; charset = UTF-8">
+    <title>회원 정보 상세</title>
+</head>
+
+<body th:align="center">
+
+<h2>회원정보 상세 page</h2>
+
+<form th:action="@{/account/updateAccount}" method="post">
+    <input name = "seq" type="hidden" th:value="${member.seq}">
+    <table th:align="center" border = "1" th:cellpadding="0" th:cellspacing="0">
+
+        <tr>
+            <td bgcolor="#ffe4b5" th:text = "No" width = "80"></td>
+            <td th:text="${member.seq}"></td>
+        </tr>
+        <tr>
+            <td bgcolor="#ffe4b5" th:text = "ID"></td>
+            <td><input type = "text" th:name = "id" th:text = "${member.id}"></td>
+        </tr>
+        <tr>
+            <td bgcolor="#ffe4b5" th:text = "PASSWORD"></td>
+            <td><input type="text" th:name="password" th:text = "${member.password}"></td>
+        </tr>
+        <tr>
+            <td bgcolor="#ffe4b5" th:text = "EMAIL"></td>
+            <td><input th:type="text" th:name = "email" th:text = "${member.email}"></td>
+        </tr>
+        <tr>
+            <td bgcolor="#ffe4b5">가입 날짜</td>
+            <td th:text = "${member.createDate}"></td>
+        </tr>
+        <tr>
+            <td colspan = "2" align = "center">
+                <input type = "submit" value = "회원정보 수정">
+            </td>
+        </tr>
+
+    </table>
+</form>
+<form th:action="@{/account/deleteAccount(seq = ${member.seq})}" method="post">
+        <button>회원정보 삭제</button>
+</form>
+
+<br>
+<hr>
+<!--get방식으로 member.id 파라미터를 갖고 server로 이동한다-->
+<!--타임리프 문법으로는 member기준으로 필드값을 출력하고 있으므로, selectBoard에 파라미터 값을 board.member.id로
+넘겨줄 경우 그에 따른 member와 board와의 관계를 타임리프에서 인지하고, 클라이언트에서 서버로 넘어갈 때 entity가
+board.member.id를 인지하고 객체화 시켜야 하는 문제가 있다.-->
+<a th:href="@{/selectBoard(id = ${member.id})}">회원 게시글 보기</a>&nbsp;&nbsp;&nbsp;
+<a th:href="@{/account/getMemberList}">회원 목록으로 이동</a>&nbsp;&nbsp;&nbsp;
+<!--<a th:href="@{/deleteBoard(seq=${member.seq})}">글 삭제</a>&nbsp;&nbsp;&nbsp;-->
+<hr>

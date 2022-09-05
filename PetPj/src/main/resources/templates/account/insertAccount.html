@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--p.341-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content = "text/html; charset = UTF-8">
+    <title>회원가입</title>
+
+</head>
+
+<center>
+    <h3>회원가입</h3>
+    <hr>
+
+    <body>
+    <!--
+        [클라이언트] html의 form태그를 통한 submit액션을 실행하면 [서버]로 전달되는 mapping주소
+        th:action = "insertBoard"
+        mothod = "post" // (get / post)받는 방식
+        [서버] 컨트롤러에서는 get방식으로 받는 것과 post방식 으로 받는 것을 구분해 줄 수 있다.-->
+    <!--아래처럼 Post방식으로 받아온다고 했으면 컨트롤러에서도 PostMapping으로 받아와야 한다.  -->
+    <form th:action = "@{/account/insertAccount}" method = "POST" th:align="center">
+        <table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
+<!--            <tr>-->
+<!--                <td bgcolor="#5f9ea0" th:text="분류" width = "70" align="center"></td>-->
+<!--                <td><select name = "category" th:width="20">-->
+<!--                    <option value="none" selected disabled hidden>==분류 선택==</option>-->
+<!--                    <option value="일반">일반회원</option>-->
+<!--                    <option value="사업자">사업자회원</option>-->
+<!--                </select>-->
+<!--                </td>-->
+<!--            </tr>-->
+            <tr>
+                <td bgcolor="#ffe4b5" th:text="ID" width = "70" align="center"></td>
+                <td><input type = "text" name = "id" size="20" placeholder="6자 이상 입력"></td>
+            </tr>
+            <tr>
+                <td bgcolor="#bc8f8f" th:text="PASSWORD" align="center"></td>
+                <td><input type = "text" name = "password" size = "20" placeholder="특수문자 포함 10자 이상 입력"></td>
+            </tr>
+            <tr>
+                <td bgcolor="green" th:text="EMAIL" align="center"></td>
+                <td><input type = "text" name = "email" size = "20"/></td>
+            </tr>
+            <tr>
+                <td colspan="2" align = "center">
+                    <input type = "submit" value = "회원 가입">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <a th:href="@{/account/getMemberList}">회원목록 으로 이동</a>
+
+</center>
+</body>
+</html>

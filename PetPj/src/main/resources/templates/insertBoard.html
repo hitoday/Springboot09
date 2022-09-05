@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--p.341-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content = "text/html; charset = UTF-8">
+    <title>새글등록</title>
+
+</head>
+
+<center>
+<h3>새글 등록하기</h3>
+<hr>
+
+<body>
+<!--
+    [클라이언트] html의 form태그를 통한 submit액션을 실행하면 [서버]로 전달되는 mapping주소
+    th:action = "insertBoard"
+    mothod = "post" // (get / post)받는 방식
+    [서버] 컨트롤러에서는 get방식으로 받는 것과 post방식 으로 받는 것을 구분해 줄 수 있다.-->
+    <!--아래처럼 Post방식으로 받아온다고 했으면 컨트롤러에서도 PostMapping으로 받아와야 한다.  -->
+<form th:action = "insertBoard" method = "POST" th:align="center" enctype="multipart/form-data">
+    <table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
+        <tr>
+            <td bgcolor="#5f9ea0" th:text="분류" width = "70" align="center"></td>
+            <td><select name = "category" th:width="20">
+                <option value="none" selected disabled hidden>==분류 선택==</option>
+                <option value="상품">상품</option>
+                <option value="배송">배송</option>
+                <option value="교환">교환</option>
+                <option value="기타">기타</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#5f9ea0" th:text="제목" width = "70" align="center"></td>
+            <td><input type = "text" name = "title" size="20"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#5f9ea0" th:text="작성자" align="center"></td>
+            <td><input type = "text" name = "writer" size = "20"/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#5f9ea0" th:text = "내용" align = "center"></td>
+            <td><textarea name = "content" cols = "40" rows = "10"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2" align = "center">
+                <input type = "submit" value = "글 등록"/>
+            </td>
+        </tr>
+    </table>
+<!--    사진 업로드-->
+    <input type="file" name="uploadfile" multiple="multiple"/>
+</form>
+<a th:href="@{/getBoardList}">게시판으로 이동</a>
+<hr>
+    <img src="/image/1e33a34f-dc20-42c6-9514-1b78df389feb_for123.jpg">
+    <img src="/viewImage/b3ab27ba-2c2b-4c36-bfab-d17cce897413_uploadfile.PNG">
+    <img src="/image/1d6a6e4a-eb11-48da-a30b-7f446a70ff48_uploadfile.PNG/filer">
+<hr>
+
+</center>
+</body>
+</html>

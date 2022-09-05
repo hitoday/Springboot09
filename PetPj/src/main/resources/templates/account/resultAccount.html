@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content = "text/html; charset = UTF-8">
+    <title>회원 정보 찾기</title>
+</head>
+
+<body th:align="center">
+
+<h2>회원정보 찾기 page</h2>
+
+    <table th:align="center" border = "1" th:cellpadding="0" th:cellspacing="0" th:width="250">
+            <p th:text="'입력한 ID는 ' + ${id} + ' 입니다'"></p>
+
+        <tr>
+            <th bgcolor = "#ffe4b5" width = "50">No</th>
+            <th bgcolor = "#ffe4b5" width = "100">ID</th>
+            <th bgcolor = "#ffe4b5" width = "100">EMAIL</th>
+        </tr>
+
+        <tr th:each = "member : ${memberL}">
+            <td th:text="${member.seq}"></td>
+            <td th:text = "${member.id}"></td>
+            <td th:text = "${member.email}"></td>
+        </tr>
+    </table>
+<a th:href="@{selectAccount}">회원정보 재 검색</a>
+<br>
+<!--<a th:href="@{/deleteBoard(seq=${member.seq})}">글 삭제</a>&nbsp;&nbsp;&nbsp;-->
+<hr>

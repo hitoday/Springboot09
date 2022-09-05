@@ -1,0 +1,73 @@
+plugins {
+    //PJT의 스프링부트 프레임워크의 버전 설정
+    id 'org.springframework.boot' version '2.7.2'
+    //프로젝트에 필요한 라이브러리를 관리해주는 툴(매니지먼트)의 버전
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    //사용 언어(python, go, 코틀린...)를 입력하면 dependency에서 추천과 다운해준다.
+    id 'java' //언어는 자바
+}
+//프로젝트 정보
+group = 'com.example'
+//pj 제작시 버전관리
+//첫번째 자리 : 메이저 업데이트, 두번째 자리 : 마이너 업데이트, 세번째 자리 : fix버전(오탈자, 이미지 변경)
+version = '0.0.1-SNAPSHOT'
+//자바 버전
+sourceCompatibility = '17'
+
+// maven 관리자 dependencies 라이브러리를 다운 받는 위치
+repositories  {
+    mavenCentral()
+}
+
+dependencies {
+
+
+    //컴파일이란?? 자바코드를 실행 가능 한 바이트 코드로 변경해주는것(바이트코드로 실행하면 컴퓨터는 인식하고 실행됨)
+    //런타임이란?? 실행가능한(컴파일이 완료 된)코드를 실행하는 시점.
+    //인터프린트는 실시간으로 개발한 코드를 해석해서 컴퓨터가 실행하는것것
+    //롬북이란?? 도메인(class)이 가져야 할 getter,setter,builder등을 자동으로 코드로 생성해줌(@어노테이션) (단! 컴파일시점에서만)
+
+    //롬북 설정
+    //도메인이 가져야 할 getter, setter, builder등을 자동으로 컴파일 시점에서 코드로 생성해 줍니다
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor'org.projectlombok:lombok'
+
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    JPA란?? Java Persistence API 자바에서 DB와 연결되는 객체지향 API(인터페이스)
+
+    //implementation란?? 구현된 전체에서 사용하는 라이브러리(프레임워크)
+    //타임리프 : springboot(백엔드)와 html을 '유연하게' 연동해주는 템플릿(단, 서버에서 사용)
+
+    //implementation 은 구현된 객체에서 사용하는 라이브러리 입니다.
+    //thymeleaf 는 springboot(백엔드)와 html 을 유연하게 연동해주는 템플릿 입니다.
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    //starter web에 tomcat이 포함되어 있음
+    //tomcat : spring 프로젝트를 웹하고 연결해주는 도구
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    //starter란?? 스프링부트에서 쓰는 기본 라이브러리의 집합
+
+    //유닛 테스트(자바코드를 만들면 잘 돌아가는지 기능별로 테스트 할 때 쓰는 용도)
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //DB 오라클 접속에 필요한 라이브러리
+    //ojdbc8 오라클에서 제공하는 라이브러리로 JAVA와 연동하기 위해 쓰임(8버전이 19c에 활용 가능)
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+    //oraclepki. osdt_core, osdt_cert 오라클과 자바 사이에서 연동되는 드라이버를 사용하기 위한 정보가 담긴 라이브러리
+    //전자지갑에 있음음
+    implementation 'com.oracle.database.security:oraclepki'
+    implementation 'com.oracle.database.security:osdt_core'
+    implementation 'com.oracle.database.security:osdt_cert'
+
+    //0829
+    //Gson 라이브러리
+
+    //0830
+    implementation 'org.seleniumhq.selenium:selenium-java'
+
+}
+//테스트 라이브러리(모듈)에 관한 정보
+tasks.named('test') {
+    useJUnitPlatform()
+}
