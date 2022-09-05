@@ -85,14 +85,8 @@ class PetPjApplicationTests {
         member.setPassword("123456");
         member.setEmail("kim319@naver.com");
         memberRepo.save(member);
-
         /*게시글 입력을 위한 Board Entity가 생성이 되고
          Column에 입력시간, writer, title, comments 값이 잘 들어가는지 테스트 합니다.*/
-        Board board = new Board();
-        board.setCreateDate(new Date());
-        board.setWriter("김명훈");
-        board.setTitle("회원가입 인사");
-        board.setComments("안녕하세요 잘 부탁드립니다");
-        boardRepo.save(board);
+
     }
 }
